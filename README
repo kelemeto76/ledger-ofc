@@ -1,0 +1,2 @@
+This isn't much, as you can tell, but I wanted to save anyone trying to do the same thing a little bit of work.  If you like/use ledger, but want a pretty graph of some basic data, this should do the trick.
+Until I design things a little better, you'll need to manually define where you ledger binary is, and where your ledger file is
