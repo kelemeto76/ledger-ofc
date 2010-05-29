@@ -2,12 +2,13 @@
 
 include 'include.php';
 
-$this_month = ' -w --forecast \'d<[next year]\' -d \'d>[next month]\' -M reg ^inc ^exp | grep " - " | awk \'{print $1 ,$7}\' ';
+//$this_month = ' -w --forecast \'d<[next year]\' -d \'d>[next month]\' -p "this year" -M reg ^inc ^exp ^eq | grep " - " | awk \'{print $1 ,$7}\' ';
+$this_month = ' -w -F "%D\t%T\n" --forecast "d<=[2010/12/31]" -d "d>=[next month]" --sort d reg checking'; 
 exec("$ledger $this_month", $output);
 
 foreach ($output as $line){
-    $tmp = explode(" ", $line);
-    $datalist[] = -1*$tmp[1];
+    $tmp = explode("\t", $line);
+    $datalist[] = 1*$tmp[1];
     $labellist[] = $tmp[0];
 }
 
@@ -23,7 +24,7 @@ $line->set_default_dot_style($default_dot);
 $x_labels = new x_axis_labels();
 $x_labels->rotate(45);
 $x_labels->set_labels( $labellist );
-$x_labels->set_steps(1);
+$x_labels->set_steps(3);
 
 $x = new x_axis();
 $x->set_labels( $x_labels );
