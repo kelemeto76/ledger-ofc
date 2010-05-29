@@ -1,9 +1,9 @@
 <?php
 
-include 'php-ofc-library/open-flash-chart.php';
+include 'include.php';
 
 $this_month = ' -w --forecast \'d<[next year]\' -d \'d>[next month]\' -M reg ^inc ^exp | grep " - " | awk \'{print $1 ,$7}\' ';
-exec("/opt/local/bin/ledger -f /Users/bettse/Documents/osufed.lgr $this_month", $output);
+exec("$ledger $this_month", $output);
 
 foreach ($output as $line){
     $tmp = explode(" ", $line);

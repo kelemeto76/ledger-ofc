@@ -1,7 +1,7 @@
 <?php
 
-include 'php-ofc-library/open-flash-chart.php';
-$ledger = "/opt/local/bin/ledger -f /Users/bettse/Documents/osufed.lgr";
+include 'include.php';
+
 $budget = ' -w -F "%-A\t%t\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp  -planned ';
 
 exec("$ledger $budget", $output);

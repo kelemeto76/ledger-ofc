@@ -1,9 +1,9 @@
 <?php
 
-include 'php-ofc-library/open-flash-chart.php';
+include 'include.php';
 
 $this_month = ' -w -J -p "daily" -d "d>=[this month] & d < [next month]"  --sort d reg checking ';
-exec("/opt/local/bin/ledger -f /Users/bettse/Documents/osufed.lgr $this_month", $output);
+exec("$ledger $this_month", $output);
 
 foreach ($output as $line){
     //make into key-value pairs

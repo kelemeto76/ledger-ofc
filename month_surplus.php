@@ -1,9 +1,9 @@
 <?php
 
-include 'php-ofc-library/open-flash-chart.php';
+include 'include.php';
 
 $this_month = ' -w -F "%-A\t%t\n" -E -p "this month" --budget -M reg ^exp -planned | sed -e \'s/USD//g\' ';
-exec("/opt/local/bin/ledger -f /Users/bettse/Documents/osufed.lgr $this_month", $output);
+exec("$ledger $this_month", $output);
 
 $max = 0;
 $min = 0;
