@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$budget = ' -w -F "%-A\t%t\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp  -planned ';
+$budget = ' -w -F "%-A\t%t\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp  -discretionary ';
 
 exec("$ledger $budget", $output);
 
