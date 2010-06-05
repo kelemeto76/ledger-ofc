@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$this_month = ' -w -F "%-A\t%t\n" -p "this month" -s -n bal ^exp | sed -e \'s/USD//g\' ';
+$this_month = ' -w -c -F "%-A\t%t\n" -p "this month" -s -n bal ^exp | sed -e \'s/USD//g\' ';
 exec("$ledger $this_month", $output);
 
 foreach ($output as $line){

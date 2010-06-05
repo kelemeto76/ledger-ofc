@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$this_month = ' -w -F "%-A\t%t\n" -E -p "this month" --budget -M reg ^exp -planned | sed -e \'s/USD//g\' ';
+$this_month = ' -w -F "%-A\t%t\n" -E -p "this month" --budget -M reg ^exp -discretionary | sed -e \'s/USD//g\' ';
 exec("$ledger $this_month", $output);
 
 $max = 0;
