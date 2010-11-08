@@ -28,7 +28,7 @@ foreach($categorylist as $key){
         $parameter= $tmp . " ";
     }
     
-    $averages = "$ledger -w -F '%D\\t%T\\n' -E -MA -c reg $key | sed -e 's/\$//g'";
+    $averages = "$ledger -w -F '%(date)\t%(total)\n' -E -MA -c reg $key | sed -e 's/\$//g' | sed -e 's/,//g'";
     
     unset($output);
     exec("$averages", $output);
