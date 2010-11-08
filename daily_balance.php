@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$this_month = ' -w -J -c -p "daily" -d "d>=[this month] & d < [next month]"  --sort d reg checking ';
+$this_month = ' -w -J -c -p "daily" -d "d>=[this month] & d < [next month]"  --sort d reg "OSU Fed:Checking" ';
 exec("$ledger $this_month", $output);
 
 foreach ($output as $line){

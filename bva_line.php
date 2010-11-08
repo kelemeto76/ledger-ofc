@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$budget = ' -w -F "%-A\t%t\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp  -discretionary ';
+$budget = ' -w -F "%(account)\t%(total)\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp | sed -e \'s/\$//g\' | sed -e \'s/,//g\' ';
 
 exec("$ledger $budget", $output);
 
@@ -28,7 +28,7 @@ foreach($categorylist as $key){
         $parameter= $tmp . " ";
     }
     
-    $averages = "$ledger -w -F '%D\\t%T\\n' -E -MA -c reg $key | sed -e 's/USD//g'";
+    $averages = "$ledger -w -F '%D\\t%T\\n' -E -MA -c reg $key | sed -e 's/\$//g'";
     
     unset($output);
     exec("$averages", $output);

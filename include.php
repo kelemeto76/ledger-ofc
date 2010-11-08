@@ -2,6 +2,6 @@
 
 include 'php-ofc-library/open-flash-chart.php';
 
-$ledger = "/opt/local/bin/ledger -f /Users/bettse/Documents/current.lgr" 
+$ledger = "/usr/local/bin/ledger -f /Users/bettse/Documents/Finances/current.lgr" 
 
 ?>

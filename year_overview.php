@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$this_month = ' -w -F "%D\t%T\n" --forecast "d<=[next year]" -d "d>=[next month] & d<=[next year]" --sort d reg checking'; 
+$this_month = ' -w -F "%(date)\t%(total)\n" --forecast "d<=[next year]" -d "d>=[next month] & d<=[next year]" --sort d reg checking'; 
 exec("$ledger $this_month", $output);
 
 foreach ($output as $line){
