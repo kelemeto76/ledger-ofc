@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$this_month = ' -w -F "%(date)\t%(total)\n" --forecast "d<=[next year]" -d "d>=[next month] & d<=[next year]" --sort d reg checking'; 
+$this_month = ' -w -F "%(date)\t%(total)\n" --forecast "d<=[today]+365" -d "d>=[next month] & d<=[today]+365" --sort d reg checking | sed -e \'s/\$//g\' | sed -e \'s/,//g\''; 
 exec("$ledger $this_month", $output);
 
 foreach ($output as $line){
@@ -11,7 +11,7 @@ foreach ($output as $line){
     $labellist[] = $tmp[0];
 }
 
-$title = new title( "Checking account forecast until end of year" );
+$title = new title( "Checking account forecast" );
 
 $default_dot = new dot();
 $default_dot->tooltip( '$#val#' );
