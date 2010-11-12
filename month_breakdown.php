@@ -8,7 +8,9 @@ exec("$ledger $this_month", $output);
 foreach ($output as $line){
     //make into key-value pairs
     $tmp = explode("\t", $line);
-    $datalist[] = new pie_value(1*$tmp[1], $tmp[0]);
+    if($tmp[0] != "Expenses" && $tmp[0] != "" && $tmp[0] != "Expenses:Bills" && $tmp[0] != "Expenses:Food" && $tmp[0] != "Expenses:Discretionary"){
+        $datalist[] = new pie_value(1*$tmp[1], $tmp[0]);
+    }
 }
 
 $title = new title( "This month spending breakdown" );

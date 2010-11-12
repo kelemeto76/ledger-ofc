@@ -2,15 +2,18 @@
 
 include 'include.php';
 
-$budget = ' -w -F "%(account)\t%(total)\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp | sed -e \'s/\$//g\' | sed -e \'s/,//g\' ';
+$budget = ' -w -F "%(account)\t%(amount)\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp | sed -e \'s/\$//g\' | sed -e \'s/,//g\' ';
+
 
 exec("$ledger $budget", $output);
 
 foreach ($output as $line){
     //make into key-value pairs
     $tmp = explode("\t", $line);
-    $categorylist[] = $tmp[0];
-    $budgetlist[$tmp[0]] = $tmp[1] * 1;
+    if($tmp[0] != "Expenses:Discretionary"){
+        $categorylist[] = $tmp[0];
+        $budgetlist[$tmp[0]] = $tmp[1] * 1;
+    }
 }
 
 $labellist = Array();
@@ -27,11 +30,11 @@ foreach($categorylist as $key){
     }else{
         $parameter= $tmp . " ";
     }
-    
-    $averages = "$ledger -w -F '%(date)\t%(total)\n' -E -MA -c reg $key | sed -e 's/\$//g' | sed -e 's/,//g'";
+   
+    $averages = ' -w -F "%(date)\t%(amount)\n" -E -MA -c reg ' . $key . ' | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
     
     unset($output);
-    exec("$averages", $output);
+    exec("$ledger $averages", $output);
 
     foreach ($output as $line){
         //make into key-value pairs
