@@ -2,6 +2,8 @@
 
 include 'include.php';
 
+
+//Get the list of budget items
 $budget = ' -w -F "%(account)\t%(amount)\n" -M -p "next month" --forecast "d<=[next month]" reg ^exp | sed -e \'s/\$//g\' | sed -e \'s/,//g\' ';
 
 
@@ -10,16 +12,16 @@ exec("$ledger $budget", $output);
 foreach ($output as $line){
     //make into key-value pairs
     $tmp = explode("\t", $line);
-    if($tmp[0] != "Expenses:Discretionary"){
-        $categorylist[] = $tmp[0];
-        $budgetlist[$tmp[0]] = $tmp[1] * 1;
+    if($tmp[0] == "Expenses:Discretionary"){
+        continue;
     }
+    $categorylist[] = $tmp[0];
+    $budgetlist[$tmp[0]] = $tmp[1] * 1;
 }
 
 $labellist = Array();
 $max = 0;
 $min = 0;
-
 
 foreach($categorylist as $key){
 
@@ -31,7 +33,7 @@ foreach($categorylist as $key){
         $parameter= $tmp . " ";
     }
    
-    $averages = ' -w -F "%(date)\t%(amount)\n" -E -MA -c reg ' . $key . ' | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
+    $averages = ' --budget -w -d "d<[today] & d > [today]-183" -F "%(date)\t%(amount)\n" -E -MA -c reg ' . $key . ' | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
     
     unset($output);
     exec("$ledger $averages", $output);
@@ -39,7 +41,7 @@ foreach($categorylist as $key){
     foreach ($output as $line){
         //make into key-value pairs
         $tmp = explode("\t", $line);
-        $diff = ($tmp[1]*1) - ($budgetlist[$key]*1); 
+        $diff = $tmp[1]*1; 
         $datalist[$key][] = $diff;
         
         if(!in_array($tmp[0], $labellist)){
@@ -59,7 +61,7 @@ foreach($categorylist as $key){
 //print_r($datalist);
 
 
-$title = new title( "Running Average - Budget" );
+$title = new title( "How far from the budget I was each month" );
 
 
 $x_labels = new x_axis_labels();
@@ -80,13 +82,14 @@ $chart->set_x_axis( $x );
 $chart->set_y_axis( $y );
 $chart->set_bg_colour( '#FFFFFF' );
 
-
 foreach($categorylist as $category){
+    $color = "#" . substr(md5($category), 0, 6); 
+    $default_dot = new dot();
+    $default_dot->size(3)->colour($color)->tooltip( '#key#:<br>$#val#' );
     $l = new line();
+    $l->set_default_dot_style($default_dot);
     $l->set_values($datalist[$category]);
     $l->set_key($category, 12);
-    $l->set_tooltip('<br>$#val#');
-    $color = "#" . substr(md5($category), 0, 6); 
     $l->set_colour( $color );
     $chart->add_element($l);
 }
