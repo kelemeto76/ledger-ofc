@@ -2,11 +2,11 @@
 
 include 'include.php';
 
-$this_month = ' -w -F "%(date)\t%(total)\n" --forecast "d<=[today]+365" -d "d>=[next month] & d<=[today]+365" --sort d reg checking | sed -e \'s/\$//g\' | sed -e \'s/,//g\''; 
+$this_month = ' -w -J --forecast "d<=[today]+365" -d "d>=[next month] & d<=[today]+365" --sort d reg FirstTech:Checking'; 
 exec("$ledger $this_month", $output);
 
 foreach ($output as $line){
-    $tmp = explode("\t", $line);
+    $tmp = explode(" ", $line);
     $datalist[] = 1*$tmp[1];
     $labellist[] = $tmp[0];
 }
