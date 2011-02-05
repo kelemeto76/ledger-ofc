@@ -13,7 +13,7 @@ function done(id)
 function post_image(name)
 {
     debug = false; 
-    url = "http://ataraxia.ericbetts.org/~bettse/ledger-ofc/php-ofc-library/ofc_upload_image.php?name=" + name + ".png";
+    url = "http://localhost/~bettse/ledger-ofc/php-ofc-library/ofc_upload_image.php?name=" + name + ".png";
     var ofc = findSWF(name);
     // call our objects image_saved() method when finished
     x = ofc.post_image(url, 'done', debug );
