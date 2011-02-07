@@ -33,7 +33,7 @@ foreach($categorylist as $key){
         $parameter= $tmp . " ";
     }
    
-    $averages = ' --budget -w -d "d<[this month] & d > [today]-250" -F "%(date)\t%(amount)\n" -E -MA -c reg ' . $key . ' | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
+    $averages = ' --budget -E -w -d "d<[this month] & d > [today]-250" -F "%(date)\t%(amount)\n" -E -MA -c reg ' . $key . ' | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
     
     unset($output);
     exec("$ledger $averages", $output);
@@ -62,7 +62,7 @@ foreach($categorylist as $key){
 
 
 $title = new title( "How far from the budget I was each month" );
-
+sort($labellist);
 
 $x_labels = new x_axis_labels();
 $x_labels->rotate(45);
