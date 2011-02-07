@@ -6,7 +6,7 @@ if (isset($_REQUEST['acct'])) {
     $acct = filter_var($_REQUEST['acct'], FILTER_SANITIZE_MAGIC_QUOTES);
     $acct = str_replace('_', ':', $acct); 
 
-    $bal_cmd = '-w -J -d "d<=[today] & d>=[today]-365" --weekly --sort d reg "' . $acct . '"'; 
+    $bal_cmd = '-w -J -c --weekly --sort d reg "' . $acct . '"'; 
     exec("$ledger $bal_cmd", $output);
 
     foreach ($output as $line){

@@ -14,6 +14,7 @@ $acctslist[] = "OSUFed:Checking";
 $acctslist[] = "OSUFed:Savings";
 $acctslist[] = "FirstTech:Checking";
 $acctslist[] = "FirstTech:Savings";
+$acctslist[] = "AmericanFunds:Money Market";
 foreach($acctslist as $acct){
 $acct = str_replace(':', '_', $acct); 
 ?>
