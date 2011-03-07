@@ -12,6 +12,14 @@ foreach ($output as $line){
     $labellist[] = $tmp[0];
 }
 
+//Prevent error on no data
+if(count($datalist < 1)){
+    $datalist[] = 0;
+    $labellist[] = 0;
+
+}
+
+
 $title = new title( "Daily checking account balance" );
 
 $default_dot = new dot();

@@ -8,11 +8,21 @@ if (isset($_REQUEST['acct'])) {
 
     $bal_cmd = '-E -w -J -c --weekly --sort d reg "' . $acct . '"'; 
     exec("$ledger $bal_cmd", $output);
+    $datalist = array();
+    $labellist = array();
 
+    //Add elements to array
     foreach ($output as $line){
         $tmp = explode(" ", $line);
         $datalist[] = 1*$tmp[1];
         $labellist[] = $tmp[0];
+    }
+
+    //Prevent error on no data
+    if(count($datalist < 1)){
+        $datalist[] = 0;
+        $labellist[] = 0;
+
     }
 
     $title = new title( $acct . " Retrospective" );

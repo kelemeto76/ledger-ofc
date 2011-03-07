@@ -2,7 +2,7 @@
 
 include 'include.php';
 
-$this_month = ' -c -w -F "%(account)\t%(amount)\n" -E -p "this month" --budget -M reg ^exp | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
+$this_month = ' -c -w -F "%(account)\t%(amount)\n" -p "this month" --budget -M reg ^exp | sed -e \'s/\$//g\' | sed -e \'s/,//g\'';
 exec("$ledger $this_month", $output);
 
 $max = 0;
