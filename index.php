@@ -7,11 +7,9 @@
 <script type="text/javascript">swfobject.embedSWF("open-flash-chart.swf", "year_overview", "900", "350", "9.0.0", "expressInstall.swf", {"data-file":"year_overview.php"} );</script>
 <script type="text/javascript">swfobject.embedSWF("open-flash-chart.swf", "daily_balance", "900", "350", "9.0.0", "expressInstall.swf", {"data-file":"daily_balance.php"} );</script>
 <script type="text/javascript">swfobject.embedSWF("open-flash-chart.swf", "month_breakdown", "600", "600", "9.0.0", "expressInstall.swf", {"data-file":"month_breakdown.php"} );</script>
-<script type="text/javascript">swfobject.embedSWF("open-flash-chart.swf", "bva_line", "900", "450", "9.0.0", "expressInstall.swf", {"data-file":"bva_line.php"} );</script>
+<script type="text/javascript">swfobject.embedSWF("open-flash-chart.swf", "budget_line", "900", "450", "9.0.0", "expressInstall.swf", {"data-file":"budget_line.php"} );</script>
 <?php
 $acctslist = Array();
-$acctslist[] = "OSUFed:Checking";
-$acctslist[] = "OSUFed:Savings";
 $acctslist[] = "FirstTech:Checking";
 $acctslist[] = "FirstTech:Savings";
 $acctslist[] = "AmericanFunds:Money Market";
@@ -30,7 +28,7 @@ $acct = str_replace(':', '_', $acct);
 <div id="month_breakdown"></div>
 <div id="daily_balance"></div>
 <div id="year_overview"></div>
-<div id="bva_line"></div>
+<div id="budget_line"></div>
 <?php foreach($acctslist as $acct){ 
 $acct = str_replace(':', '_', $acct); 
 ?>
