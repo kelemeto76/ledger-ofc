@@ -5,7 +5,6 @@
 
 <?php
 $bankslist = Array();
-$bankslist[] = "OSUFed";
 $bankslist[] = "FirstTech";
 foreach($bankslist as $bank){?>
 
